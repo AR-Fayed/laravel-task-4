@@ -149,13 +149,12 @@ class CartController extends Controller
         $ship = $this->shipping($productQuantity);
         $total = $this->total($productQuantity);
 
+         Session::put('productQuantity', $productQuantity);
         
-        // $totalPrice = [];
-        // array_push($totalPrice, ['total' => $total,'sub'=>$sub,'ship'=>$ship]);
-        // Session::put('totalPrice', $totalPrice);
-        // //$request->session()->push('totalPrice', $totalPrice);
-        // $test = Session::get('totalPrice');
-        // dd($test);
+         $totalPrice = [];
+         array_push($totalPrice, ['total' => $total,'sub'=>$sub,'ship'=>$ship]);
+         Session::put('totalPrice', $totalPrice);
+         $test = Session::get('totalPrice');
        
         if($user =$request->user()){
             $token = $user['api_token'];
@@ -168,8 +167,5 @@ class CartController extends Controller
         return view('checkout', compact('productQuantity','sub','ship','total','token','name'));
     }
     
-    function order(Request $request){
-        $test = Session::all();
-        dd($test);
-    }
+    
 }

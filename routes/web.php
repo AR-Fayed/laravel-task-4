@@ -35,7 +35,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/decQuantity', [CartController::class,'decQuantity']);
     Route::get('/deleteProduct', [CartController::class,'deleteProduct']);
     Route::get('/checkout', [CartController::class,'checkout']);
-    Route::get('/order', [CartController::class,'order']);
     
 });
 
@@ -63,5 +62,6 @@ Route::middleware(['auth','can:is_admin'])->prefix('/admin')->group(function(){
     Route::get('/logout', [UsersController::class, 'logout']);
 
 });
+
 
 

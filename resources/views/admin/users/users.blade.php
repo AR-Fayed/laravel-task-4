@@ -31,17 +31,25 @@
                       <td>{{$user['id']}}</td>
                       <td>{{$user['name']}}</td>
                       <td>{{$user['email']}}</td>
-                      @if($user['is_admin'] == true)
+                      {{-- @if($user['is_admin'] == true)
                         <td>Yes</td>
                       @else
                         <td>No</td>
-                      @endif
+                      @endif --}}
                       <td>
+                        <form action="{{url('admin/users/'.$user->id)}}" method="POST">
+                            @method('PUT')
+                            @csrf
+                            <button class="btn btn-success">{{$user['is_admin']?'yes':'no'}}</button></td>
+                        </form>
+                        </td>
+                        <td>
                         <form action="{{url('admin/users/'.$user->id)}}" method="POST">
                             @method('DELETE')
                             @csrf
-                            <button onclick="return confirm('Are you sure?')" class="btn btn-danger"><h7 class="fa fa-trash text-white"></h7></button></td>
+                            <button onclick="return confirm('Are you sure?')" class="btn btn-danger"><h7 class="fa fa-trash text-white"></h7></button>
                         </form>
+                    </td>
                   </tr>
                   @endforeach
               </tbody>

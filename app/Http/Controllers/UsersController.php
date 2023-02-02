@@ -38,12 +38,12 @@ class UsersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function update(Request $request, $id)
     {
-        $request->validate(User::$rules);
-        $user = new User;
-        $user->fill($request->post());
-        $user['is_admin'] = $request['is_admin']? 1 : 0;
+        $user = User::findOrFail($id);
+        if($user['is_admin']==true){
+            $user['is_admin'] = false;
+        }else{$user['is_admin'] = true;}
         $user->save();
 
         return redirect('admin/users');
